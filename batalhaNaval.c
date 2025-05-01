@@ -7,6 +7,34 @@
 int main() {
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
+    int i, j;
+    char * navio1[3] = {"3","3","3"};
+    char * navio2[3] = {"3","3","3"};
+    char * tabuleiro[10][10] = {
+        {"0", "0", "0", "0", "0","0","0","0","0","0"},
+        {"0", "0", "0", "0", "0","0","0","0","0","0"},
+        {"0", "0", "0", "0", "0","0","0","0","0","0"},
+        {"0", "0", "0", "0", "0","0","0","0","0","0"},
+        {"0", "0", navio2[0], navio2[1], navio2[2],"0","0","0","0","0"},
+        {"0", "0", "0", "0", "0","0","0","0","0","0"},
+        {"0", "0", "0", "0", "0","0","0","0","0","0"},
+        {navio1[0], "0", "0", "0", "0","0","0","0","0","0"},
+        {navio1[1], "0", "0", "0", "0","0","0","0","0","0"},
+        {navio1[2], "0", "0", "0", "0","0","0","0","0","0"}
+        
+    };
+
+    for(i = 0; i < 10; i++) {
+        for (j = 0; j < 10; j++) 
+        {
+            printf("%s ", tabuleiro[i][j]);
+        }
+        printf("\n");
+
+    }
+
+    printf("As cordenadas do navio 1 são: [7][0], [8][0], [9][0]:\n");
+    printf("As cordenadas do navio 2 são: [4][2], [4][3], [4][4]\n");
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
