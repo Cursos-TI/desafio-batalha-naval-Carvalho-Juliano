@@ -4,37 +4,80 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
 // Siga os comentários para implementar cada parte do desafio.
 
+#define DIMENSAO_TABULEIRO 10
+#define HABILIDADE 5
+
 int main() {
     // Nível Novato - Posicionamento dos Navios
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     int i, j;
-    char * navio1[3] = {"3","3","3"};
-    char * navio2[3] = {"3","3","3"};
-    char * tabuleiro[10][10] = {
-        {"0", "0", "0", "0", "0","0","0","0","0","0"},
-        {"0", "0", "0", "0", "0","0","0","0","0","0"},
-        {"0", "0", "0", "0", "0","0","0","0","0","0"},
-        {"0", "0", "0", "0", "0","0","0","0","0","0"},
-        {"0", "0", navio2[0], navio2[1], navio2[2],"0","0","0","0","0"},
-        {"0", "0", "0", "0", "0","0","0","0","0","0"},
-        {"0", "0", "0", "0", "0","0","0","0","0","0"},
-        {navio1[0], "0", "0", "0", "0","0","0","0","0","0"},
-        {navio1[1], "0", "0", "0", "0","0","0","0","0","0"},
-        {navio1[2], "0", "0", "0", "0","0","0","0","0","0"}
-        
-    };
+    int matriz[DIMENSAO_TABULEIRO][DIMENSAO_TABULEIRO] = {0};
+    int habilidade[HABILIDADE][HABILIDADE] = {0};
+    int origemLinha = 2;
+    int origemColuna = 4;
 
-    for(i = 0; i < 10; i++) {
-        for (j = 0; j < 10; j++) 
-        {
-            printf("%s ", tabuleiro[i][j]);
+    //Criação dos navios manualmente no codigo
+    matriz[4][4] = 3;
+    matriz[4][5] = 3;
+    matriz[4][6] = 3;
+
+    matriz[7][4] = 3;
+    matriz[7][5] = 3;
+    matriz[7][6] = 3;
+
+    matriz[0][0] = 3;
+    matriz[1][1] = 3;
+    matriz[2][2] = 3;
+
+    matriz[0][5] = 3;
+    matriz[1][6] = 3;
+    matriz[2][7] = 3;
+
+    //IMPRIMIR HABILIDADE NO TABULEIRO
+    for (i = 0; i < HABILIDADE; i++) {
+        for (j = 0; j < HABILIDADE; j++){
+            if (j >= (HABILIDADE / 2) - i && j <= (HABILIDADE / 2) + i) {
+                habilidade[i][j] = 1;  // marca área de efeito
+            }
         }
-        printf("\n");
-
     }
 
-    printf("As cordenadas do navio 1 são: [7][0], [8][0], [9][0]:\n");
-    printf("As cordenadas do navio 2 são: [4][2], [4][3], [4][4]\n");
+    /*Codigos para os outros formatos das habilidades.*/
+    //codigo para habilidade em cruz
+    //if (i == HABILIDADE / 2 || j == HABILIDADE / 2)
+    //habilidade[i][j] = 1
+
+    //codigo para habilidade em losango
+    // if (abs(i - HABILIDADE / 2) + abs(j - HABILIDADE / 2) <= HABILIDADE / 2)
+    // habilidade[i][j] = 1;
+
+    for ( i = 0; i < HABILIDADE; i++) {
+        for ( j = 0; j < HABILIDADE; j++) {
+            // Calcula posição no tabuleiro
+            int linhaTabuleiro = origemLinha + i - HABILIDADE / 2;
+            int colunaTabuleiro = origemColuna + j - HABILIDADE / 2;
+
+            // Verifica se está dentro dos limites
+            if (linhaTabuleiro >= 0 && linhaTabuleiro < DIMENSAO_TABULEIRO &&
+                colunaTabuleiro >= 0 && colunaTabuleiro < DIMENSAO_TABULEIRO) {
+                if (habilidade[i][j] == 1 && matriz[linhaTabuleiro][colunaTabuleiro] != 3) {
+                    matriz[linhaTabuleiro][colunaTabuleiro] = 5;  // marca área afetada
+                }
+            }
+        }
+    }
+
+    //TABULEIRO
+    for(i = 0; i < DIMENSAO_TABULEIRO; i++){
+        for (j = 0; j < DIMENSAO_TABULEIRO; j++)
+        {
+            printf("%d ", matriz[i][j]);
+        }
+        
+        printf("\n");
+    }
+
+
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
 
